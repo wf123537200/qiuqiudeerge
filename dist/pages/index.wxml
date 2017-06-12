@@ -1,0 +1,14 @@
+
+  <view class="container">
+    <view class="userinfo">
+      <text class="userinfo-nickname">{{motto}}</text>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"/>
+    </view>
+    <!-- 4test -->
+    <!--<view class="">
+      <text class="enter" bindtap="playsongs">听儿歌</text>
+    </view>-->
+    <view class="">
+      <text class="enter" bindtap="playstory">听故事</text>
+    </view>
+  </view>

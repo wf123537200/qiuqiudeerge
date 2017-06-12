@@ -1,0 +1,29 @@
+<style lang="scss">
+  /**index.wxss**/
+</style>
+
+<template>
+  <view class="container">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '球球的儿歌'
+    }
+    components = {}
+
+    data = {}
+
+    computed = {}
+
+    methods = {}
+
+    events = {}
+
+    onLoad() {}
+  }
+</script>

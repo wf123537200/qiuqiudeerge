@@ -1,0 +1,94 @@
+<style lang="scss">
+  /**index.wxss**/
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+
+  .usermotto {
+    margin-top: 200px;
+  }
+
+  /** 4test **/
+  .enter {
+    margin-top: 30rpx;
+    width: 250rpx;
+    background: #3ca0dc;
+    display:block;
+    color:#eee;
+    line-height:2.5;
+    text-align:center;
+    border-radius:10rpx;
+  }
+</style>
+
+<template>
+  <view class="container">
+    <view class="userinfo">
+      <text class="userinfo-nickname">{{motto}}</text>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    </view>
+    <!-- 4test -->
+    <!--<view class="">
+      <text class="enter" @tap="playsongs">听儿歌</text>
+    </view>-->
+    <view class="">
+      <text class="enter" @tap="playstory">听故事</text>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '球球的儿歌'
+    }
+    components = {
+    }
+
+    data = {
+      motto: '',
+      userInfo: {}
+    }
+
+    computed = {}
+
+    events = {}
+
+    methods = {
+      playsongs(event) {
+        wepy.navigateTo({
+          url: '/pages/playsongs'
+        })
+      },
+      playstory(event) {
+        wepy.navigateTo({
+          url: '/pages/playstory'
+        })
+      }
+    }
+
+    onLoad() {
+      this.$parent.getUserInfo((userInfo) => {
+        this.setData({
+          userInfo: userInfo,
+          motto: '您好！' + userInfo.nickName
+        })
+      })
+    }
+  }
+</script>

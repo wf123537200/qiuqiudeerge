@@ -1,0 +1,97 @@
+<style lang='scss'>
+  .btn-wrap {
+    display:flex;
+  }
+
+  .btn {
+    margin:20rpx;
+  }
+
+  .audio-wrap {
+    margin-top: 20rpx;
+    position:relative;
+  }
+
+  .total {
+    position: absolute;
+    top: 55%;
+    right: 35rpx;
+    font-size: 22rpx;
+  }
+</style>
+
+<template>
+  <view class='container'>
+    <view class='audio-wrap' for='{{songs}}' key='{{index}}'>
+      <!-- audio.wxml -->
+      <audio data-index='{{index}}' @tap='setCurAudio' poster='{{item.poster}}' name='{{item.name}}' author='{{item.author}}' src='{{item.src}}' id='{{index}}' controls loop></audio>
+      <view class='total'>
+        <text>总时长： {{item.maxTime}}</text>
+      </view>
+    </view>
+    <view class='btn-wrap'>
+      <button class='{{playBtnClass}}' type='' @tap='audioCtrl'></button>
+      <button class='btn' type='' class='btn iconfont icon-chongbo' @tap='audioReStart'></button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import {getAudioData, getPoster} from '../utils/audio'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '歌曲列表'
+    }
+
+    components = {}
+
+    data = {
+      playBtnClass: 'btn iconfont icon-bofang',
+      songs: getAudioData(),
+    }
+
+    computed = {}
+
+    events = {}
+
+    methods = {
+      setCurAudio(e) {
+        const index = +e.currentTarget.dataset.index;
+        if(index !== this.curAudioIndex) {
+          this.audioCtx.pause();
+          this.audioCtx.seek(0);
+        }
+
+        this.audioCtx = wepy.createAudioContext(index + '');
+        this.curAudioIndex = index;
+      },
+      audioCtrl: function () {
+        const curAudio = this.data.songs[+this.curAudioIndex];
+        const status = curAudio.playStatus;
+        if(status === 'play') {
+          this.audioCtx.pause()
+          curAudio.playStatus = 'stop';
+          this.setData({
+            playBtnClass: 'btn iconfont icon-bofang'
+          });
+        } else {
+          this.audioCtx.play();
+          curAudio.playStatus = 'play';
+          this.setData({
+            playBtnClass: 'btn iconfont icon-tingzhi'
+          });
+        }
+      },
+      audioReStart: function () {
+        this.audioCtx.seek(0)
+      }
+    }
+
+    onReady(e) {
+      this.audioCtx = wepy.createAudioContext('0');
+      this.curAudioIndex = 0;
+    }
+  }
+</script>
