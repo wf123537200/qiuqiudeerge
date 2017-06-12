@@ -38,7 +38,7 @@
 
 <script>
   import wepy from 'wepy'
-  import {getAudioData, getPoster} from '../utils/audio'
+  import {getAudioData} from '../utils/audio'
 
   export default class Index extends wepy.page {
     config = {
