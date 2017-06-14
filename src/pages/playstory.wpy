@@ -43,7 +43,6 @@
   import wepy from 'wepy'
   import {getAudioData} from '../utils/audio'
   import Content from '../components/content'
-  console.log(getAudioData());
 
   export default class Index extends wepy.page {
     config = {

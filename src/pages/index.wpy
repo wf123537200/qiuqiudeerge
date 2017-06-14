@@ -32,6 +32,13 @@
     text-align:center;
     border-radius:10rpx;
   }
+
+  .info {
+    .test {
+      margin-top:100rpx;
+      font-size:18rpx;
+    }
+  }
 </style>
 
 <template>
@@ -46,6 +53,10 @@
     </view>-->
     <view class="">
       <text class="enter" @tap="playstory">听故事</text>
+    </view>
+
+    <view class="info">
+      <text class="text">当前版本为建设中版本，如果您有任何想法，可以点击建议按钮，给我留言</text>
     </view>
 
     <!-- 联系按钮 -->
