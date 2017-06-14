@@ -3,7 +3,7 @@
     position:fixed;
     bottom: 20rpx;
     right: 20rpx;
-    background:#ccc;
+    background:#e54b4d;
     border-radius:50%;
     width: 56rpx;
     height: 56rpx;

@@ -34,10 +34,8 @@
   }
 
   .info {
-    .test {
-      margin-top:100rpx;
-      font-size:18rpx;
-    }
+    margin-top:100rpx;
+    font-size:18rpx;
   }
 </style>
 
