@@ -1,0 +1,52 @@
+<style lang="scss">
+  .content {
+    position:fixed;
+    bottom: 20rpx;
+    right: 20rpx;
+    background:#ccc;
+    border-radius:50%;
+    width: 56rpx;
+    height: 56rpx;
+
+    .btn {
+      margin: 10rpx;
+    }
+
+    .text {
+      font-size:20rpx;
+      float:left;
+      width:80rpx;
+      position:fixed;
+      right:80rpx;
+      text-align:right;
+      bottom:38rpx;
+    }
+  }
+</style>
+<template>
+  <view class="content">
+    <text class="text">建议=></text>
+    <contact-button
+      class="btn"
+      type="default-light"
+      session-from="weapp"
+    >
+    </contact-button>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class Counter extends wepy.component {
+    props = {
+    }
+
+    data = {
+    }
+    events = {
+    }
+
+    methods = {
+    }
+  }
+</script>

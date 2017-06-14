@@ -22,7 +22,7 @@
 
 <template>
   <view class='container'>
-    <view class='audio-wrap' for='{{songs}}' key='{{index}}'>
+    <view class='audio-wrap' wx:for='{{songs}}' wx:key='{{index}}'>
       <!-- audio.wxml -->
       <audio data-index='{{index}}' @tap='setCurAudio' poster='{{item.poster}}' name='{{item.name}}' author='{{item.author}}' src='{{item.src}}' id='{{index}}' controls loop></audio>
       <view class='total'>
@@ -33,19 +33,26 @@
       <button class='{{playBtnClass}}' type='' @tap='audioCtrl'></button>
       <button class='btn' type='' class='btn iconfont icon-chongbo' @tap='audioReStart'></button>
     </view>
+
+    <!-- 联系按钮 -->
+    <content></content>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
   import {getAudioData} from '../utils/audio'
+  import Content from '../components/content'
+  console.log(getAudioData());
 
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '歌曲列表'
     }
 
-    components = {}
+    components = {
+      content: Content
+    }
 
     data = {
       playBtnClass: 'btn iconfont icon-bofang',

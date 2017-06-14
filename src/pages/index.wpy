@@ -47,17 +47,23 @@
     <view class="">
       <text class="enter" @tap="playstory">听故事</text>
     </view>
+
+    <!-- 联系按钮 -->
+    <content></content>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
+  import Content from '../components/content'
 
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '球球的儿歌'
     }
+
     components = {
+      content: Content
     }
 
     data = {
