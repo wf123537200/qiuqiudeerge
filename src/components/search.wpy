@@ -1,0 +1,55 @@
+<style lang="scss">
+  .search {
+    width:80%;
+    padding:0 10%;
+
+    input {
+      float:left;
+      width:450rpx;
+      padding:10rpx;
+      border:1px solid #ccc;
+      font-size:30rpx;
+      border-radius:10rpx;
+    }
+
+    button {
+      font-size:30rpx;
+    }
+  }
+</style>
+<template>
+  <view class="search">
+    <input  type="text" confirm-type="search" placeholder="{{placeholder}}" @input="onInput"/>
+    <button type="primary" @tap="onSearch">搜索</button>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class Counter extends wepy.component {
+    props = {
+      placeholder: {
+        type: String,
+        default: ''
+      },
+      searchFn: {
+        type: Function
+      }
+    }
+
+    data = {
+      inputValue: ''
+    }
+    events = {
+    }
+
+    methods = {
+      onInput(e) {
+        this.inputValue = e.detail.value;
+      },
+      onSearch() {
+        this.$emit('searchFn', this.inputValue);
+      }
+    }
+  }
+</script>

@@ -18,20 +18,37 @@
     right: 35rpx;
     font-size: 22rpx;
   }
+
+  .audio-wrap {
+    .reset-btn {
+      position:absolute;
+      right:160rpx;
+      top:62%;
+      transform:translate(-50%, -50%);
+      border-radius:50%;
+      font-size:12px;
+      padding:4rpx 6rpx;
+      color:#000;
+
+    }
+  }
 </style>
 
 <template>
   <view class='container'>
+    <search placeholder="用名称或作者搜索" @searchFn.user="searchInList"></search>
     <view class='audio-wrap' wx:for='{{songs}}' wx:key='{{index}}'>
       <!-- audio.wxml -->
       <audio data-index='{{index}}' @tap='setCurAudio' poster='{{item.poster}}' name='{{item.name}}' author='{{item.author}}' src='{{item.src}}' id='{{index}}' controls loop></audio>
       <view class='total'>
         <text>总时长： {{item.maxTime}}</text>
       </view>
+      <view class="reset-btn-wrap">
+        <view class='reset-btn iconfont icon-chongbo' @tap='audioReStart({{index}})'></view>
+      </view>
     </view>
     <view class='btn-wrap'>
-      <button class='{{playBtnClass}}' type='' @tap='audioCtrl'></button>
-      <button class='btn' type='' class='btn iconfont icon-chongbo' @tap='audioReStart'></button>
+      <icon class='{{playBtnClass}}' @tap='audioCtrl'></icon>
     </view>
 
     <!-- 联系按钮 -->
@@ -43,19 +60,22 @@
   import wepy from 'wepy'
   import {getAudioData} from '../utils/audio'
   import Content from '../components/content'
+  import Search from '../components/search'
 
+  const allAudioData = getAudioData();
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '歌曲列表'
     }
 
     components = {
-      content: Content
+      content: Content,
+      search: Search
     }
 
     data = {
       playBtnClass: 'btn iconfont icon-bofang',
-      songs: getAudioData(),
+      songs: allAudioData
     }
 
     computed = {}
@@ -70,7 +90,7 @@
           this.audioCtx.seek(0);
         }
 
-        this.audioCtx = wepy.createAudioContext(index + '');
+        this.audioCtx = wx.createAudioContext(index + '');
         this.curAudioIndex = index;
       },
       audioCtrl: function () {
@@ -90,13 +110,19 @@
           });
         }
       },
-      audioReStart: function () {
-        this.audioCtx.seek(0)
+      audioReStart: function (id) {
+        const audioCtx = wx.createAudioContext(id + '');
+        audioCtx.seek(0);
+      },
+      searchInList: function (val) {
+        this.songs = allAudioData.filter(t => {
+            return t.name.indexOf(val) > -1 || t.author.indexOf(val) > -1;
+        });
       }
     }
 
     onReady(e) {
-      this.audioCtx = wepy.createAudioContext('0');
+      this.audioCtx = wx.createAudioContext('0');
       this.curAudioIndex = 0;
     }
   }
