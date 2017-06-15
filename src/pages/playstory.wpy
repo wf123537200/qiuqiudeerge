@@ -47,9 +47,6 @@
         <view class='reset-btn iconfont icon-chongbo' @tap='audioReStart({{index}})'></view>
       </view>
     </view>
-    <view class='btn-wrap'>
-      <icon class='{{playBtnClass}}' @tap='audioCtrl'></icon>
-    </view>
 
     <!-- 联系按钮 -->
     <content></content>
@@ -92,23 +89,6 @@
 
         this.audioCtx = wx.createAudioContext(index + '');
         this.curAudioIndex = index;
-      },
-      audioCtrl: function () {
-        const curAudio = this.data.songs[+this.curAudioIndex];
-        const status = curAudio.playStatus;
-        if(status === 'play') {
-          this.audioCtx.pause()
-          curAudio.playStatus = 'stop';
-          this.setData({
-            playBtnClass: 'btn iconfont icon-bofang'
-          });
-        } else {
-          this.audioCtx.play();
-          curAudio.playStatus = 'play';
-          this.setData({
-            playBtnClass: 'btn iconfont icon-tingzhi'
-          });
-        }
       },
       audioReStart: function (id) {
         const audioCtx = wx.createAudioContext(id + '');
